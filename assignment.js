@@ -50,7 +50,8 @@ const sizeLength = MENUS.size.length;
 
 let activeView = VIEWS.MAIN;
 let cursor = { main: 0, strategy: 0, asset: 0, size: 0 };
-let pressCount = 0;
+// FIXED: issue #1 => removed coz it ignores some inputs
+// let pressCount = 0;
 // let lastPressTime = 0;
 
 readline.emitKeypressEvents(process.stdin);
@@ -58,7 +59,6 @@ if (process.stdin.isTTY) process.stdin.setRawMode(true);
 
 process.stdin.on('keypress', (ch, key) => {
     if (!key) return;
-    // FIXED: issue #1 => removed coz it ignores some inputs
     //   pressCount++;
     //   if (pressCount > 3 && pressCount < 7) return;
 
@@ -260,3 +260,15 @@ drawMain();
 //     engine.stop();
 //     process.exit(0);
 // });
+
+
+/** SUMMARY
+ * FIXED: issue #1 => Removed the keypress counter and the check for the number of count [it ignores inputs as in the condition].
+ * FIXED: issue #2, #4 => Removed the condition with the keypress speed.
+ * FIXED: issue #3 => Removed resetting the cursor on 'escape'.
+ * FIXED: issue #5 => Implemented a func to ensure stopping the services properly + 
+ * 
+ * - Removed the block of 'q' handling coz it is already handled.
+ * - Handled ctrl+c [coz ctrl + c did not work]. 
+ * - Replaced the hardcoded values.
+ */
