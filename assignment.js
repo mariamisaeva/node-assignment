@@ -43,6 +43,11 @@ const VIEWS = {
     ABOUT: 'about'
 };
 
+const mainMenuLength = MENUS.main.length;
+const strategyLength = MENUS.strategy.length;
+const assetLength = MENUS.asset.length;
+const sizeLength = MENUS.size.length;
+
 let activeView = VIEWS.MAIN;
 let cursor = { main: 0, strategy: 0, asset: 0, size: 0 };
 let pressCount = 0;
@@ -75,10 +80,10 @@ process.stdin.on('keypress', (ch, key) => {
     // FIXED: issue #3 => commented out resetting cursor to 0
     if (activeView === VIEWS.MAIN) {
         if (key.name === 'up') {
-            cursor.main = (cursor.main - 1 + 5) % 5;
+            cursor.main = (cursor.main - 1 + mainMenuLength) % mainMenuLength;
             drawMain();
         } else if (key.name === 'down') {
-            cursor.main = (cursor.main + 1) % 5;
+            cursor.main = (cursor.main + 1) % mainMenuLength;
             drawMain();
         } else if (key.name === 'return') {
             if (cursor.main === 0) {
@@ -109,10 +114,10 @@ process.stdin.on('keypress', (ch, key) => {
             // cursor.main = 0;
             drawMain();
         } else if (key.name === 'up') {
-            cursor.strategy = (cursor.strategy - 1 + 4) % 4;
+            cursor.strategy = (cursor.strategy - 1 + strategyLength) % strategyLength;
             drawStrategy();
         } else if (key.name === 'down') {
-            cursor.strategy = (cursor.strategy + 1) % 4;
+            cursor.strategy = (cursor.strategy + 1) % strategyLength;
             drawStrategy();
         } else if (key.name === 'return') {
             cursor.asset = 0;
@@ -124,10 +129,10 @@ process.stdin.on('keypress', (ch, key) => {
             activeView = VIEWS.STRATEGY;
             drawStrategy();
         } else if (key.name === 'up') {
-            cursor.asset = (cursor.asset - 1 + 10) % 10;
+            cursor.asset = (cursor.asset - 1 + assetLength) % assetLength;
             drawAsset();
         } else if (key.name === 'down') {
-            cursor.asset = (cursor.asset + 1) % 10;
+            cursor.asset = (cursor.asset + 1) % assetLength;
             drawAsset();
         } else if (key.name === 'return') {
             cursor.size = 0;
@@ -139,10 +144,10 @@ process.stdin.on('keypress', (ch, key) => {
             activeView = VIEWS.ASSET;
             drawAsset();
         } else if (key.name === 'up') {
-            cursor.size = (cursor.size - 1 + 10) % 10;
+            cursor.size = (cursor.size - 1 + sizeLength) % sizeLength;
             drawSize();
         } else if (key.name === 'down') {
-            cursor.size = (cursor.size + 1) % 10;
+            cursor.size = (cursor.size + 1) % sizeLength;
             drawSize();
         } else if (key.name === 'return') {
             activeView = VIEWS.VERIFY;
